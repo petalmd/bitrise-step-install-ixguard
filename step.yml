@@ -2,11 +2,11 @@ title: |-
   Install iXGuard
 summary: |
   Download and install Guardsquare and iXGuard.
-description: |
-  The Step downloads and installs the guardsquare and ixguard cli tools required to process and protect an xcarchive.
-  You only need to specify the version of iXGuard you'd like to install and make sure an ssh key (registered with Guardsquare) is loaded into the SSH agent.
-  The SSH configuration can be performed using the Activate SSH key Step.
-  The Step will only perform the download and install if the cli is not installed or is not the prefered version.
+# description: |
+#   The Step downloads and installs the guardsquare and ixguard cli tools required to process and protect an xcarchive.
+#   You only need to specify the version of iXGuard you'd like to install and make sure an ssh key (registered with Guardsquare) is loaded into the SSH agent.
+#   The SSH configuration can be performed using the Activate SSH key Step.
+#   The Step will only perform the download and install if the cli is not installed or is not the prefered version.
 website: https://github.com/npinney/bitrise-step-install-ixguard
 source_code_url: https://github.com/npinney/bitrise-step-install-ixguard
 support_url: https://github.com/npinney/bitrise-step-install-ixguard/issues
