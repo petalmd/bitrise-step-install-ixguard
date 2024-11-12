@@ -24,8 +24,10 @@ inputs:
   - version: $IXGUARD_VERSION
     opts:
       title: "Version"
-      summary: Specify which version of iXGaurd you'd like to download and install.
-      description: By default, version 4.12.6 will be installed. If another version was previously installed, a new install will be performed.
+      summary: Specify which version of iXGuard you'd like to download and install.
+      description: |
+        Default 4.12.6.
+        If a different version is detected, this Step will run to install the correct version.
       is_expand: true
       is_required: true
       value_options: []
