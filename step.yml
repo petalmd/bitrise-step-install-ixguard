@@ -1,12 +1,10 @@
-title: |-
-  Install iXGuard
-summary: |
-  Download and install Guardsquare and iXGuard.
-description: |
-  The Step downloads and installs the guardsquare and ixguard cli tools required to process and protect an xcarchive.
-  You only need to specify the version of iXGuard you'd like to install and make sure an ssh key (registered with Guardsquare) is loaded into the SSH agent.
-  The SSH configuration can be performed using the Activate SSH key Step.
-  The Step will only perform the download and install if the cli is not installed or is not the prefered version.
+title: Install iXGuard
+summary: Download and install Guardsquare and iXGuard.
+description: |-
+  Downloads and installs guardsquare and ixguard in order to process and protect an archive. If the correct version of iXGuard is already detected, the download will be skipped.
+
+  ### Configuring the Step
+  By default, the Step requires no configuration. To be able to use it, you only need to you have an ssh key registered with Guardsquare added to the local SSH agent. In bitrise, this can be done with the [Certificate and profile install](https://github.com/bitrise-steplib/steps-certificate-and-profile-installer) provided the private key was uploaded to bitrise.
 website: https://github.com/npinney/bitrise-step-install-ixguard
 source_code_url: https://github.com/npinney/bitrise-step-install-ixguard
 support_url: https://github.com/npinney/bitrise-step-install-ixguard/issues
@@ -23,11 +21,9 @@ toolkit:
 inputs:
   - version: $IXGUARD_VERSION
     opts:
-      title: "Version"
+      title: Version
       summary: Specify which version of iXGuard you'd like to download and install.
-      description: |
-        Default 4.12.6.
-        If a different version is detected, this Step will run to install the correct version.
+      description: Default is 4.12.6. If a different version is detected, the Step will install the correct version.
       is_expand: true
       is_required: true
       value_options: []
