@@ -9,7 +9,14 @@ Downloads and installs guardsquare and ixguard in order to process and protect a
 
 ### Configuring the Step
 
-By default, the Step requires no configuration. To be able to use it, you only need to you have an ssh key registered with Guardsquare added to the local SSH agent. In bitrise, this can be done with the [Certificate and profile install](https://github.com/bitrise-steplib/steps-certificate-and-profile-installer) provided the private key was uploaded to bitrise.
+To be able to use the Step, you need to create and register an ssh key to grant permission to Guardsquare.
+
+1. Create key pair using `ssh-keygen`.
+2. Create a secure passphrase for your private key.
+3. Upload the public key `.pub` to your Guardsquare account.
+4. Upload the private key file to the **Files** secion of your Bitrise project.
+5. Create a **Secret Env Variable** for the private key passphrase (make sure to escape any special characters with a `\` before saving).
+6. If your file download URL or Secret Env Variable does not correspond with the defaults, make sure you list them as inputs to the Step.
 
 </details>
 
@@ -27,8 +34,7 @@ Download and install iXGuard version 4.12.2 to your workflow.
 workflows:
   deploy:
     steps:
-      - certificate-and-profile-installer@1: {}
-      - git::git@github.com:npinney/bitrise-step-install-ixguard.git:
+      - git::https://github.com/npinney/bitrise-step-install-ixguard.git@main:
           inputs:
             - version: "4.12.2"
 ```
@@ -41,6 +47,8 @@ workflows:
 | Key | Description | Flags | Default |
 | --- | --- | --- | --- |
 | `version` | Default is 4.12.6. If a different version is detected, the Step will install the correct version. | | `$IXGUARD_VERSION` |
+| `ssh_key_file` | Private key download link to grant access to Guardsquare.  | | `$BITRISEIO_GUARDSQUARE_SSH_KEY_FILE_URL` |
+| `ssh_key_passphrase` | Passphrase used to decrypt the ssh private key. Make sure special symbols have been escaped. | | `$GUARDSQUARE_SSH_KEY_PASSPHRASE` |
 
 </details>
 

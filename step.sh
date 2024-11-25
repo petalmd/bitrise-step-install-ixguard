@@ -1,12 +1,11 @@
 #!/bin/bash
 set -e
 
-# Desired version of iXGuard
 REQUIRED_VERSION=${version}
 SSH_KEY_FILE_URL=${ssh_key_file}
 SSH_KEY_PASSPHRASE=${ssh_key_passphrase}
 
-# Download and install the ssh key for Guardsquare access if variable is truthy
+# Download and install the ssh key for Guardsquare access given url and passphrase are defined
 if [ -n "$SSH_KEY_FILE_URL" ] && [ -n "$SSH_KEY_PASSPHRASE" ]; then
     curl $SSH_KEY_FILE_URL -o "protected_ixguard_key"
     chmod 600 ./protected_ixguard_key
