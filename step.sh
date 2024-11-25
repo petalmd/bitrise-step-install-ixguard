@@ -13,7 +13,7 @@ if [ -n "$SSH_KEY_FILE_URL" ] && [ -n "$SSH_KEY_PASSPHRASE" ]; then
 
     expect <<EOF
 set timeout -1
-spawn ssh-add --apple-use-keychain "protected_ixguard_key"
+spawn ssh-add "./protected_ixguard_key"
 expect "Enter passphrase for"
 send "$SSH_KEY_PASSPHRASE\r"
 expect eof
