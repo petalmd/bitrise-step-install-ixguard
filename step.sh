@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 # Desired version of iXGuard
 REQUIRED_VERSION=${version}
