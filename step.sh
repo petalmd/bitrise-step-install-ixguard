@@ -9,6 +9,8 @@ SSH_KEY_PASSPHRASE=${ssh_key_passphrase}
 # Download and install the ssh key for Guardsquare access if variable is truthy
 if [ -n "$SSH_KEY_FILE_URL" ] && [ -n "$SSH_KEY_PASSPHRASE" ]; then
     curl $SSH_KEY_FILE_URL -o "protected_ixguard_key"
+    chmod 600 ./protected_ixguard_key
+
     eval "$(ssh-agent -s)"
 
     expect <<EOF
