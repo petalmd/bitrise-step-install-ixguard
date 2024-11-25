@@ -1,16 +1,19 @@
 #!/bin/bash
-set -e
+set -ex
 
 # Desired version of iXGuard
 REQUIRED_VERSION=${version}
-IXGUARD_SSH_KEY_FILE_URL=${ssh_key}
+SSH_KEY_FILE_URL=${ssh_key_file}
+SSH_KEY_PASSPHRASE=${ssh_key_passphrase}
 
 # Download and install the ssh key for Guardsquare access if variable is truthy
-if [ -n "$IXGUARD_SSH_KEY_FILE_URL" ]; then
-    curl $IXGUARD_SSH_KEY_FILE_URL -o "ssh_private_key"
-
+if [ -n "$SSH_KEY_FILE_URL" && -n "$SSH_KEY_PASSPHRASE" ]; then
+    curl $SSH_KEY_FILE_URL -o "ssh_private_key"
     eval "$(ssh-agent -s)"
-    ssh-add --apple-use-keychain "ssh_private_key"
+
+    spawn ssh-add --apple-use-keychain "ssh_private_key"
+    expect "Enter passphrase for"
+    send "$SSH_KEY_PASSPHRASE\r"
 else
     echo "SSH key for iXGuard access is missing."
     exit 1

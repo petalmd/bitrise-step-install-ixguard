@@ -15,6 +15,9 @@ type_tags:
   - installer
 is_always_run: false
 is_skippable: false
+deps:
+  brew:
+  - name: expect
 toolkit:
   bash:
     entry_file: step.sh
@@ -27,15 +30,21 @@ inputs:
       is_expand: true
       is_required: true
       value_options: []
-  - ssh_key: $BITRISEIO_GUARDSQUARE_SSH_KEY_FILE_URL
+  - ssh_key_file: $BITRISEIO_GUARDSQUARE_SSH_KEY_FILE_URL
     opts:
       title: SSH Private Key Url
       summary: Private key download link to grant access to Guardsquare.
       description: |- 
-        Make sure the private key is not encrypted with a passphrase.
-        
         After generating the key-pair, make sure that you upload the public key to Guardsquare and add the
         private key file to the *Files* section of Bitrise found under *Project Settings*.
+      is_expand: true
+      is_required: true
+      value_options: []
+  - ssh_key_passphrase: $GUARDSQUARE_SSH_KEY_PASSPHRASE
+    opts:
+      title: SSH Private Key Passphrase
+      summary: Passphrase used to decrypt the ssh private key.
+      description: This should be stored in your bitrise secrets.
       is_expand: true
       is_required: true
       value_options: []
