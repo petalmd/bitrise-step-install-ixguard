@@ -3,13 +3,14 @@ set -e
 
 # Desired version of iXGuard
 REQUIRED_VERSION=${version}
+IXGUARD_SSH_KEY=${ssh_key}
 
 # Download and install the ssh key for Guardsquare access
-if [ -n "${BITRISEIO_GUARDSQUARE_SSH_KEY_FILE_URL}" ]; then
-    echo "SSH key or passphrase is missing. SSH key is required to download guardsquare."
+if [ -n "${IXGUARD_SSH_KEY}" ]; then
+    echo "SSH key for iXGuard access is missing."
     exit 1
 else
-    curl ${BITRISEIO_GUARDSQUARE_SSH_KEY_FILE_URL} -o "ssh_private_key"
+    curl ${IXGUARD_SSH_KEY} -o "ssh_private_key"
 
     eval "$(ssh-agent -s)"
     ssh-add --apple-use-keychain "ssh_private_key"

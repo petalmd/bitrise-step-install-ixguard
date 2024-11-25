@@ -27,3 +27,15 @@ inputs:
       is_expand: true
       is_required: true
       value_options: []
+  - ssh_key: $BITRISEIO_GUARDSQUARE_SSH_KEY_FILE_URL
+    opts:
+      title: SSH Private Key Url
+      summary: Private key download link to grant access to Guardsquare.
+      description: |- 
+        Make sure the private key is not encrypted with a passphrase.
+        
+        After generating the key-pair, make sure that you upload the public key to Guardsquare and add the
+        private key file to the *Files* section of Bitrise found under *Project Settings*.
+      is_expand: true
+      is_required: true
+      value_options: []
