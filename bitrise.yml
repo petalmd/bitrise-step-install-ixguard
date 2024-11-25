@@ -4,7 +4,7 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 workflows:
   sample-workflow:
     steps:
-      - certificate-and-profile-installer@1: {}
       - path::./:
           inputs:
-            - version: 4.12.5
+            - version: 4.12.6
+            - ssh_key_file: './protected_ixguard_key'
