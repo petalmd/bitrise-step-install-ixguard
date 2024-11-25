@@ -7,7 +7,7 @@ SSH_KEY_FILE_URL=${ssh_key_file}
 SSH_KEY_PASSPHRASE=${ssh_key_passphrase}
 
 # Download and install the ssh key for Guardsquare access if variable is truthy
-if [ -n "$SSH_KEY_FILE_URL" && -n "$SSH_KEY_PASSPHRASE" ]; then
+if [ -n "$SSH_KEY_FILE_URL" ] && [ -n "$SSH_KEY_PASSPHRASE" ]; then
     curl $SSH_KEY_FILE_URL -o "ssh_private_key"
     eval "$(ssh-agent -s)"
 
