@@ -6,5 +6,6 @@ workflows:
     steps:
       - path::./:
           inputs:
-            - version: 4.12.6
-            - ssh_key_file: './protected_ixguard_key'
+            - version: 4.15.0
+            - ssh_key_file: ./guardsquare_key
+            - ssh_key_passphrase: $GUARDSQUARE_SSH_KEY_PASSPHRASE

@@ -7,7 +7,13 @@ SSH_KEY_PASSPHRASE=${ssh_key_passphrase}
 
 # Download and install the ssh key for Guardsquare access given url and passphrase are defined
 if [ -n "$SSH_KEY_FILE_URL" ] && [ -n "$SSH_KEY_PASSPHRASE" ]; then
-    curl $SSH_KEY_FILE_URL -o "protected_ixguard_key"
+    # Check if SSH_KEY_FILE_URL is a local file or URL
+    if [ -f "$SSH_KEY_FILE_URL" ]; then
+        cp "$SSH_KEY_FILE_URL" "protected_ixguard_key"
+    else
+        curl "$SSH_KEY_FILE_URL" -o "protected_ixguard_key"
+    fi
+
     chmod 600 ./protected_ixguard_key
 
     eval "$(ssh-agent -s)"
@@ -27,17 +33,19 @@ fi
 
 # Check if desired version of ixguard, otherwise use default
 if [ -z "$REQUIRED_VERSION" ]; then
-    echo "No version set. Selecting default version 4.12.6"
-    REQUIRED_VERSION="4.12.6"
+    echo "No version set. Selecting default version 4.15.0"
+    REQUIRED_VERSION="4.15.0"
 fi
 
 if ! command -v ixguard >/dev/null 2>&1 || [[ "$(ixguard --version)" != *"$REQUIRED_VERSION"* ]]; then
     echo "iXGuard not found or incorrect version. Installing version $REQUIRED_VERSION..."
+   
 
     if ! command -v guardsquare >/dev/null 2>&1; then
         echo "Downloading guardsquare..."
+
         # Download and install guardsquare CLI
-        curl https://downloads.guardsquare.com/cli/latest_macos_amd64 -sL | tar -x && sudo mv -i guardsquare /usr/local/bin/
+        curl -sS https://platform.guardsquare.com/cli/install.sh | sh -s -- --yes
     fi
 
     # Download and install ixguard package
