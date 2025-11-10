@@ -4,27 +4,20 @@ set -e
 REQUIRED_VERSION=${version}
 SSH_KEY_FILE_URL=${ssh_key_file}
 SSH_KEY_PASSPHRASE=${ssh_key_passphrase}
+KEY_PATH="$HOME/.ssh/protected_ixguard_key"
 
 # Download and install the ssh key for Guardsquare access given url and passphrase are defined
 if [ -n "$SSH_KEY_FILE_URL" ] && [ -n "$SSH_KEY_PASSPHRASE" ]; then
-    curl "$SSH_KEY_FILE_URL" -o "protected_ixguard_key"
-    chmod 600 ./protected_ixguard_key
+    mkdir -p "$HOME/.ssh"
 
-    # Ensure .ssh directory exists
-    mkdir -p ~/.ssh
-    chmod 700 ~/.ssh
+    curl -fSL "$SSH_KEY_FILE_URL" -o "$KEY_PATH"
+    chmod 600 "$KEY_PATH"
 
-    # Add Guardsquare host to known_hosts to avoid prompt
-    ssh-keyscan platform.guardsquare.com >> ~/.ssh/known_hosts 2>/dev/null
-
-    # Start ssh-agent and export variables for the session
     eval "$(ssh-agent -s)"
-    export SSH_AUTH_SOCK
-    export SSH_AGENT_PID
 
     expect <<EOF
 set timeout -1
-spawn ssh-add "./protected_ixguard_key"
+spawn ssh-add "$KEY_PATH"
 expect "Enter passphrase for"
 send "$SSH_KEY_PASSPHRASE\r"
 expect eof
