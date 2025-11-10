@@ -30,8 +30,8 @@ fi
 
 # Check if desired version of ixguard, otherwise use default
 if [ -z "$REQUIRED_VERSION" ]; then
-    echo "No version set. Selecting default version 4.15.0"
-    REQUIRED_VERSION="4.15.0"
+    echo "No version set. Selecting default version 4.15.1"
+    REQUIRED_VERSION="4.15.1"
 fi
 
 if ! command -v ixguard >/dev/null 2>&1 || [[ "$(ixguard --version)" != *"$REQUIRED_VERSION"* ]]; then

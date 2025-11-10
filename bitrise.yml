@@ -8,4 +8,3 @@ workflows:
           inputs:
             - version: 4.15.0
             - ssh_key_file: ./guardsquare_key
-            - ssh_key_passphrase: $GUARDSQUARE_SSH_KEY_PASSPHRASE
