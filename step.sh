@@ -6,18 +6,7 @@ SSH_KEY_FILE_URL=${ssh_key_file}
 SSH_KEY_PASSPHRASE=${ssh_key_passphrase}
 PLATFORM=${platform}
 
-
-
 KEY_PATH="$HOME/.ssh/protected_ixguard_key"
-
-if [ "$PLATFORM" == "android" ]; then
-    PLATFORM_FLAG="--android"
-elif [ "$PLATFORM" == "ios" ]; then
-    PLATFORM_FLAG="--ios"
-else
-    echo "Invalid platform. Supported platforms are android and ios."
-    exit 1
-fi
 
 # Download and install the ssh key for Guardsquare access given url and passphrase are defined
 if [ -n "$SSH_KEY_FILE_URL" ] && [ -n "$SSH_KEY_PASSPHRASE" ]; then
