@@ -38,6 +38,14 @@ inputs:
       is_expand: true
       is_required: true
       value_options: []
+  - platform: $PLATFORM
+    opts:
+      title: Platform
+      summary: Specify the platform you'd like to download and install Guardsquare CLI for.
+      description: Default is android. Supported platforms are android and ios.
+      is_expand: true
+      is_required: true
+      value_options: []
   - ssh_key_file: $BITRISEIO_GUARDSQUARE_SSH_KEY_FILE_URL
     opts:
       title: SSH Private Key Url
