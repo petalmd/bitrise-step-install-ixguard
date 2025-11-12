@@ -19,11 +19,9 @@ if [ -n "$SSH_KEY_FILE_URL" ] && [ -n "$SSH_KEY_PASSPHRASE" ]; then
 
     expect <<EOF
 set timeout -1
-ssh-add -l
 spawn ssh-add "$KEY_PATH"
 expect "Enter passphrase for"
 send "$SSH_KEY_PASSPHRASE\r"
-ssh-add -l
 expect eof
 EOF
 
